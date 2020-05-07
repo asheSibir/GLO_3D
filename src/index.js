@@ -1,4 +1,13 @@
 'use strict';
+import 'nodelist-foreach-polyfill'; //https://www.npmjs.com/package/nodelist-foreach-polyfill
+import elementClosest from'element-closest'; //https://www.npmjs.com/ С НИМ ВОТ ТАК!!!
+elementClosest(window);
+import 'formdata-polyfill';
+import 'es6-promise';
+import 'fetch-polyfill';
+import '@babel/polyfill'; //https://babeljs.io/docs/en/babel-polyfill
+
+
 import countTimer from './modules/countTimer';
 import toggle from './modules/toggle';
 import togglePopUp from './modules/togglePopUp';
