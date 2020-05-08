@@ -14,9 +14,7 @@ import smoothScroll from './modules/smoothScroll';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import showDataPhot from './modules/showDataPhot';
-import checkData from './modules/checkData';
-import calc from './modules/calc';
-import increaseTotal from './modules/increaseTotal';
+import calculator from './modules/calc';
 import sendForm from './modules/sendForm';
 
 
@@ -35,11 +33,7 @@ slider();
 // Наша команда, замена фоток (отрабатываем делегирование + dataset)
 showDataPhot();
 // Калькулятор (отрабатываем регулярки, на ограничение ввода)
-checkData();
-// Работа калькулятора
-calc(100);
-// Анимация калькулятора
-increaseTotal();
+calculator();
 // Отправка формы
 sendForm();
 

@@ -39,13 +39,13 @@ const togglePopUp =()=> {
         }
         popupGoesDown = requestAnimationFrame(leavePopup);
     };
-    btnPopupClose.addEventListener('click', movePopup);
 
-    popup.addEventListener(('click'), (event)=>{
-        let target = event.target;
-        target = target.closest('.popup-content');
-        if (target === null){
-            popup.style.display = 'none';
+    popup.addEventListener('click', (event)=> {
+        const target = event.target;
+        if(popupContent){
+            if (target === btnPopupClose || target.closest('.popup-content') === null){
+                movePopup();
+            } 
         }
     });
 };

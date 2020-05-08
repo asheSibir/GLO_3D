@@ -13,8 +13,7 @@ const slider = () => {
         const newDot = dot.cloneNode(true);
         dotsUl.appendChild(newDot);
     }
-    const dots = dotsUl.querySelectorAll('li'); 
-    dots[0].classList.add('dot-active');
+    const dots = dotsUl.querySelectorAll('li');
 // ДОТЫ СНОВА С НАМИ            
     let currentSlide = 0, 
         interval; //для включения и остановки
@@ -25,16 +24,16 @@ const slider = () => {
     const nextSlide = (elem, index, strClass) =>{
         elem[index].classList.add(strClass);
     };
-    // Сам слайдер, активация и дизактивация класса (видимости) элемента
+    // Сам слайдер, активация и деактивация класса (видимости) элемента
     const autoPlaySlide = () => {
         prevSlide(slide, currentSlide, 'portfolio-item-active');
-        prevSlide(dots, currentSlide, 'dot-active'); //ВЕРНУТЬ!!
+        prevSlide(dots, currentSlide, 'dot-active'); 
         currentSlide++;
         if (currentSlide === slide.length){
             currentSlide = 0;
         }
         nextSlide(slide, currentSlide, 'portfolio-item-active');
-        nextSlide(dots, currentSlide, 'dot-active'); //ВЕРНУТЬ!!
+        nextSlide(dots, currentSlide, 'dot-active'); 
     };
     const startSlide = (time = 3000) => {
         interval = setInterval(autoPlaySlide, time);
@@ -48,13 +47,13 @@ const slider = () => {
 
         if (target.matches('#arrow-right, #arrow-left, .dot')){
             prevSlide(slide, currentSlide, 'portfolio-item-active');
-            prevSlide(dots, currentSlide, 'dot-active'); //ВЕРНУТЬ!!
+            prevSlide(dots, currentSlide, 'dot-active'); 
             if (target.matches('#arrow-right')){
                 currentSlide++;
             } else if (target.matches('#arrow-left')){
                 currentSlide--;
                 } 
-                else if (target.matches('.dot')){ //ВЕРНУТЬ!!
+                else if (target.matches('.dot')){ 
                         dots.forEach((elem, index) => {
                             if (elem === target){
                                 currentSlide = index;
@@ -68,7 +67,7 @@ const slider = () => {
                 currentSlide = slide.length - 1;
             }
             nextSlide(slide, currentSlide, 'portfolio-item-active');
-            nextSlide(dots, currentSlide, 'dot-active'); //ВЕРНУТЬ!!
+            nextSlide(dots, currentSlide, 'dot-active');
         }
     });
     slider.addEventListener('mouseover', (event) => {
@@ -81,7 +80,7 @@ const slider = () => {
            startSlide(1500);
         }
     });
-    startSlide(1500);
+    startSlide(4000);
         
 };
 export default slider;

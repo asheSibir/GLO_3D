@@ -32,27 +32,26 @@ const sendForm = () => {
             statusMessage.textContent = errorMessage;
         }
     };
-    const successFin = (status) => {
+    const successFin = () => {
         const loader = document.getElementById('loader'),
         formPopUp = document.querySelector('.popup-content');
         loader.style.display = 'none';
         formPopUp.style.display = 'none';
         statusMessage.textContent = successsMessage;
-
     }
     
     forms.forEach((form) => {
         form.addEventListener('submit', (event)=> {
-            event.preventDefault();
-            form.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
-            form.insertAdjacentHTML('beforeend', preloader());
-            const formData = new FormData(form);
-            const postData = (body) => {
-                return fetch('./server.php', {
+            event.preventDefault(); //не отправляем пустую форму
+            form.appendChild(statusMessage); // добавляем информацию о загрузке для user
+            statusMessage.textContent = loadMessage; // "Загрузка"
+            form.insertAdjacentHTML('beforeend', preloader()); //спиннер
+            const formData = new FormData(form); //получаем объект для отправки
+            const postData = (body) => { 
+                return fetch('server.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: formData,
                     credentials: 'include'
@@ -61,21 +60,23 @@ const sendForm = () => {
             
             postData(formData)
                 .then((response) => {
-                    if (response.status !== 200){
-                        return new Error();
-                    } 
-                    successFin();                      
+                    if(response.status !== 200){
+                        throw new Error(response.statusText);
+                    }
+                    return response.body;                    
                 })
-                // .then((data) => {
-                //     console.log(data);
-                // })
-                .catch(showError);
+                .then(() => {
+                    successFin();
+                })
+                .catch((err) => {
+                    console.warn(err);
+                    statusMessage.textContent = errorMessage;
+                });
             
             const inputs = [form.querySelectorAll('input')];
             inputs[0].forEach((elem) => {
                 elem.value = '';
             });
-            
         });
     });    
 
@@ -91,24 +92,24 @@ const sendForm = () => {
             if (input.name === 'user_name'){
                 if (/^[А-ЯЁ][а-яё]*$/gi.test(input.value)){
                     return;
-                } else {input.value = '';}
+                } else {input.value = input.value.slice(0,-1);}
             }
             if (input.name === 'user_email'){
-                if (/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/gi.test(input.value)){
+                if (/^[a-z\d@\._]*$/gi.test(input.value)){
                     return;
-                } else {input.value = '';}
+                } else {input.value = input.value.slice(0,-1);}
             }
             if (input.name === 'user_phone'){
-                if(/\+?[\d\s\-\(\)]{10,}/g.test(input.value)){
-                    return;
-                }  else {input.value = '';}
+                if(/\D/g.test(input.value)){
+                    input.value = input.value.slice(0,-1);
+                }
             }
         });
-    } 
+    }; 
 
     forms.forEach((form) => {
-        form.addEventListener('change', (event)=> {
-            validate(form);
+        form.addEventListener('keyup', (event)=> {
+            setTimeout(validate(form), 2000);
         });
     });
  

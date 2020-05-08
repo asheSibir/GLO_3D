@@ -1,7 +1,7 @@
 const toggle = () => {
     const body = document.querySelector('body'),
         menuBlock = body.querySelector('main'),
-        btnMenu = body.querySelector('.menu'),//это в самом верху
+        btnMenu = body.querySelector('.menu'),
         menu = body.querySelector('menu'),
         closeBtn = body.querySelector('.close-btn'),
         menuItems = menu.querySelectorAll('ul>li');

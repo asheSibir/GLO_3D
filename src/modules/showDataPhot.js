@@ -3,19 +3,19 @@ const showDataPhot = () => {
     const command = document.getElementById('command'),
         images = command.querySelectorAll('img');
         let basicPic;
-    
-        command.addEventListener('mouseover', (event)=> {
-            let target = event.target;
-            target = target.closest('.command__photo');
-            if (target){
-                basicPic = target.currentSrc;
-                    target.addEventListener('mouseenter', (event)=> {
-                        target.src = target.dataset.img;
-                    });
-                    target.addEventListener('mouseout', (event)=> {
-                        target.src = basicPic;
-                    }); 
-                }  
+
+        images.forEach((img)=>{
+            
+            img.addEventListener('mouseover', (event)=> {
+                basicPic = img.currentSrc;
+                if (event){
+                    img.src = img.dataset.img;
+                }
+            });
+            img.addEventListener('mouseout', (event)=> {
+                img.src = basicPic;
+            }); 
         });
+        
 };
 export default showDataPhot;
