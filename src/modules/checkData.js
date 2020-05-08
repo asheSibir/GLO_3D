@@ -1,4 +1,4 @@
-'use strict';
+
 const checkData = () => {
     const calcBlock = document.querySelector('.calc-block');
     calcBlock.addEventListener('input', (event) =>{

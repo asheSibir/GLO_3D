@@ -1,4 +1,4 @@
-'use strict';
+
 const increaseTotal = () => {
     const calcBlock = document.querySelector('.calc-block'),
         totalValue = document.getElementById('total');

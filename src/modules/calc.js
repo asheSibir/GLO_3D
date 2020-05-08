@@ -1,4 +1,3 @@
-'use strict';
 const calc = (price = 100) => {
     const calcBlock = document.querySelector('.calc-block'),
         calcType = calcBlock.querySelector('.calc-type'),

@@ -1,4 +1,4 @@
-'use strict';
+
 function countTimer (deadline){
     const timerHours = document.getElementById("timer-hours"),
         timerMinutes = document.getElementById("timer-minutes"),

@@ -1,4 +1,4 @@
-'use strict';
+
 const smoothScroll = () => {
     const linkOfLi = document.querySelectorAll('li>a'),
         btnDown = document.querySelector('[href="#service-block"]');

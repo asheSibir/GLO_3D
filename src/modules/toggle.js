@@ -1,4 +1,3 @@
-'use strict';
 const toggle = () => {
     const body = document.querySelector('body'),
         menuBlock = body.querySelector('main'),

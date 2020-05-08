@@ -1,4 +1,4 @@
-'use strict';
+
 const showDataPhot = () => {
     const command = document.getElementById('command'),
         images = command.querySelectorAll('img');

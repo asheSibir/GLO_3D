@@ -1,4 +1,3 @@
-'use strict';
 import 'nodelist-foreach-polyfill'; //https://www.npmjs.com/package/nodelist-foreach-polyfill
 import elementClosest from'element-closest'; //https://www.npmjs.com/ С НИМ ВОТ ТАК!!!
 elementClosest(window);
