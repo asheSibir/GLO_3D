@@ -47,25 +47,29 @@ const sendForm = () => {
             statusMessage.textContent = loadMessage; // "Загрузка"
             form.insertAdjacentHTML('beforeend', preloader()); //спиннер
             const formData = new FormData(form); //получаем объект для отправки
+            let body = {};
+            for (let val of formData.entries()) {
+                body[val[0]] = val[1];
+            }
             const postData = (body) => { 
                 return fetch('server.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: formData,
+                    body: JSON.stringify(body), 
                     credentials: 'include'
                 }); 
             };
             
-            postData(formData)
+            postData(body)
                 .then((response) => {
                     if(response.status !== 200){
                         throw new Error(response.statusText);
                     }
                     return response.body;                    
                 })
-                .then(() => {
+                .then((data) => {
                     successFin();
                 })
                 .catch((err) => {
