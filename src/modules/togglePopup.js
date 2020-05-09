@@ -36,8 +36,17 @@ const togglePopUp =()=> {
                 popup.style.display = 'none';
                 cancelAnimationFrame(leavePopup);
             } 
-        }
+        };
         popupGoesDown = requestAnimationFrame(leavePopup);
+        window.addEventListener('resize', ()=> {
+            let width = window.innerWidth;
+            if (width > 768){
+                popupGoesDown = requestAnimationFrame(leavePopup);
+            } else {
+                cancelAnimationFrame(popupGoesDown);
+                popup.firstElementChild.style.top = 200 + 'px';
+            }
+        });
     };
 
     popup.addEventListener('click', (event)=> {
@@ -48,5 +57,6 @@ const togglePopUp =()=> {
             } 
         }
     });
+    
 };
 export default togglePopUp;
