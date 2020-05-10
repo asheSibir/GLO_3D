@@ -2,14 +2,56 @@ const togglePopUp =()=> {
     const popup = document.querySelector('.popup'),
         popupBtn = document.querySelectorAll('.popup-btn'),
         btnPopupClose = document.querySelector('.popup-close'),
-        popupContent = popup.querySelector('.popup-content');
-
+        popupContent = popup.querySelector('.popup-content'),
+        mainForm = popup.querySelector('.main-form');
+    const makeForm = () => {
+        let count = 0;
+        let fullfil;
+        let actForm = () => {
+            fullfil = requestAnimationFrame(actForm);
+            count += 1;
+            if (count === 10){
+                mainForm.innerHTML = '';
+                mainForm.innerHTML = `<h3 style='color: #fff !important;'>Введите свои данные для связи с нами!</h3>`;
+            }
+            if (count > 10 && count <=45){
+                popupContent.style.height = `${count}rem`;
+            }
+            if (count === 45){
+                mainForm.innerHTML = `
+                <h3>Введите свои данные для связи с нами!</h3>
+			<form id="form3" name="user_form">
+				<div>
+					<input type="text" class="form-name" id="form3-name" name="user_name" placeholder="Ваше имя"
+								 required>
+				</div>
+				<div>
+					<input type="tel" class="form-phone" id="form3-phone" name="user_phone"
+								 placeholder="Ваш номер телефона" required>
+				</div>
+				<div>
+					<input type="email" class="form-email" id="form3-email" name="user_email"
+								 placeholder="Ваш E-mail">
+				</div>
+				<button class="btn form-btn" type="submit">Оставить заявку!</button>
+			</form>
+                `;
+            }
+        };
+        setInterval(actForm, 1000);
+        fullfil = requestAnimationFrame(actForm);
+    };
     popupBtn.forEach((elem) => {
         elem.addEventListener('click', () => {
             popup.style.display = 'block';
             popup.style.popupContent = '10%';
+            mainForm.innerHTML = `
+            <h2 style='color: #fff !important;'>Давайте познакомимся!</h2>
+            `;
+            setTimeout (makeForm, 1000);
         });
     });
+    
     const movePopup = () => {
 
         let initialTop = 10;
@@ -38,15 +80,6 @@ const togglePopUp =()=> {
             } 
         };
         popupGoesDown = requestAnimationFrame(leavePopup);
-        window.addEventListener('resize', ()=> {
-            let width = window.innerWidth;
-            if (width > 768){
-                popupGoesDown = requestAnimationFrame(leavePopup);
-            } else {
-                cancelAnimationFrame(popupGoesDown);
-                popup.firstElementChild.style.top = 200 + 'px';
-            }
-        });
     };
 
     popup.addEventListener('click', (event)=> {
@@ -57,6 +90,6 @@ const togglePopUp =()=> {
             } 
         }
     });
-    
+
 };
 export default togglePopUp;

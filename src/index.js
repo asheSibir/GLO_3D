@@ -17,7 +17,7 @@ import toggle from './modules/toggle';
 import togglePopUp from './modules/togglePopUp';
 import smoothScroll from './modules/smoothScroll';
 import tabs from './modules/tabs';
-import slider from './modules/slider';
+import moveSlider from './modules/slider';
 import showDataPhot from './modules/showDataPhot';
 import calculator from './modules/calc';
 import sendForm from './modules/sendForm';
@@ -34,7 +34,7 @@ smoothScroll ();
 //TABS 
 tabs();
 // Slider
-slider();
+moveSlider();
 // Наша команда, замена фоток (отрабатываем делегирование + dataset)
 showDataPhot();
 // Калькулятор (отрабатываем регулярки, на ограничение ввода)

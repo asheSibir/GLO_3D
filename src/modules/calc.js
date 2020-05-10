@@ -62,7 +62,11 @@ const calculator = () => {
             const increase = () => {
                 totalValue.innerHTML = 0;
                 if (step < target){
-                    step += 1; 
+                    if (target < 1000){
+                        step += 1; 
+                    } else {
+                        step += Math.ceil(target/100);
+                    }
                 } else if (step > target){
                     step -= step;
                 }

@@ -4,17 +4,17 @@ const toggle = () => {
         btnMenu = body.querySelector('.menu'),
         menu = body.querySelector('menu'),
         closeBtn = body.querySelector('.close-btn'),
-        menuItems = menu.querySelectorAll('ul>li');
+        menuItems = menu.querySelectorAll('a');
 
     const handlerMenu = () => {
         menu.classList.toggle('active-menu');
-    }
+    };
 
     body.addEventListener('click', (event) => {
         let target = event.target;
-        if (target.closest('menu') || target.closest('.menu')){
+        if (target.closest('a') || target.closest('.menu')){
             handlerMenu();  
-        } else {
+        } else if (!target.closest('menu')){
             menu.classList.remove('active-menu');
         }
         

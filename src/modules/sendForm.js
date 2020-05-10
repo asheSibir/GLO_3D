@@ -32,13 +32,20 @@ const sendForm = () => {
             statusMessage.textContent = errorMessage;
         }
     };
+    const hideMessage = () => {
+        statusMessage.style.display = "none";
+    };
     const successFin = () => {
         const loader = document.getElementById('loader'),
         formPopUp = document.querySelector('.popup-content');
         loader.style.display = 'none';
         formPopUp.style.display = 'none';
         statusMessage.textContent = successsMessage;
-    }
+        if (statusMessage.textContent === successsMessage){
+            setTimeout(hideMessage, 5000);
+        }
+    };
+    
     
     forms.forEach((form) => {
         form.addEventListener('submit', (event)=> {
@@ -75,6 +82,10 @@ const sendForm = () => {
                 .catch((err) => {
                     console.warn(err);
                     statusMessage.textContent = errorMessage;
+                    setTimeout(() => {
+                        hideMessage();
+                        document.getElementById('loader').style.display = "none";
+                    }, 5000);
                 });
             
             const inputs = [form.querySelectorAll('input')];
@@ -108,11 +119,22 @@ const sendForm = () => {
                     input.value = input.value.slice(0,-1);
                 }
             }
+            if (input.name === 'user_message'){
+                if (/^[А-ЯЁа-яё\.,\?!_\-\(\)'":;\s]*$/gi.test(input.value)){
+                    return;
+                } else {input.value = input.value.slice(0,-1);}
+            }
+
         });
     }; 
 
     forms.forEach((form) => {
         form.addEventListener('keyup', (event)=> {
+            setTimeout(validate(form), 2000);
+        });
+    });
+    forms.forEach((form) => {
+        form.addEventListener('input', (event)=> {
             setTimeout(validate(form), 2000);
         });
     });
